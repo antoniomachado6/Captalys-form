@@ -51,6 +51,10 @@
         <form id="form" action="https://api-hub-dev.zaz.vc">
           <h1>Falazap Formulário</h1>
           <div class="mb-3">
+            <label for="urlFalazap" class="form-label">URL</label>
+            <input type="text" class="form-control" id="urlFalazap" name="urlFalazap" placeholder="Nome" value="https://captalys.dev.web.fintalk.io" />
+          </div>
+          <div class="mb-3">
             <label for="nomeCliente" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" placeholder="Nome" />
           </div>
@@ -117,7 +121,7 @@
       e.preventDefault();
       const iframeContainer = $('.col.iframe-content');
       iframeContainer.empty();
-      const iframeBaseUrl = "https://captalys.dev.web.fintalk.io";
+      const iframeBaseUrl = $("#urlFalazap").val();
       const actionUrl = $form.attr("action");
       const formData = new FormData($form[0]);
       const payload = { json: Object.fromEntries(formData) };
@@ -129,7 +133,7 @@
         headers: { 'Content-Type': 'application/json' },
         data: JSON.stringify(payload),
         success: function (data) {
-          iframeContainer.append(`<iframe width="360" height="600" allow="microfone;" src="${iframeBaseUrl}/#/${data.id}"></iframe>`)          
+          iframeContainer.append(`<iframe width="700px" height="600px" allow="microfone;" src="${iframeBaseUrl}/#/${data.id}"></iframe>`)          
           $('#btnClear').click();
         },
         error: function (jqXHR, textStatus, errorThrown) {
